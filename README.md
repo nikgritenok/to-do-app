@@ -1,5 +1,3 @@
-Вот пример файла README.md для вашего to-do приложения:
-
 # To-Do List Application
 
 This is a simple **To-Do List** application built using **HTML**, **SCSS**, and **JavaScript**. The application allows users to add, edit, and delete tasks, as well as manage their to-do list interactively.
