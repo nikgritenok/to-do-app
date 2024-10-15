@@ -24,7 +24,6 @@ This is a simple **To-Do List** application built using **HTML**, **SCSS**, and 
    ```bash
    git clone https://github.com/yourusername/todo-app.git
    cd todo-app
-   sass static/scss/style.scss static/css/style.css
    ```
 
 2. Open index.html in your browser to view the application.
