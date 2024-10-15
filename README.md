@@ -24,8 +24,12 @@ This is a simple **To-Do List** application built using **HTML**, **SCSS**, and 
    ```bash
    git clone https://github.com/yourusername/todo-app.git
    cd todo-app
+   sass static/scss/style.scss static/css/style.css
+   ```
 
-   2.	Open index.html in your browser to view the application.
-   3.	To make changes to the SCSS, ensure you have a SCSS compiler (e.g., sass or node-sass). Run the following command to compile the SCSS to CSS:
+2. Open index.html in your browser to view the application.
+3. To make changes to the SCSS, ensure you have a SCSS compiler (e.g., sass or node-sass). Run the following command to compile the SCSS to CSS:
+
+   ```bash
    sass static/scss/style.scss static/css/style.css
    ```
