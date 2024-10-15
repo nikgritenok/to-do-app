@@ -1,0 +1,345 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("../../static/fonts/Roboto-Regular.ttf");
+}
+
+@mixin focus-color {
+  border: 1px solid $focus-color;
+  background-color: $background-color;
+}
+
+@mixin color {
+  border: 1px solid #a35709;
+  background-color: $background-color;
+}
+.root {
+  background-color: $background-color;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  .task-input-container {
+    max-width: 400px;
+    width: 100vw;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+
+    .input-container {
+      max-width: 300px;
+      width: 100vw;
+      height: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .title-input {
+        max-width: 300px;
+        width: 100vw;
+        height: 30px;
+        font-family: "Roboto";
+        @include color();
+        border-radius: 4px;
+        color: #f0e3caa3;
+        outline: none;
+      }
+      .title-input:focus {
+        @include focus-color();
+      }
+
+      .about-input {
+        max-width: 300px;
+        width: 100vw;
+        height: 30px;
+        font-family: "Roboto";
+        @include color();
+        color: #f0e3caa3;
+        border-radius: 4px;
+        outline: none;
+      }
+      .about-input:focus {
+        @include focus-color();
+      }
+    }
+    .add-button {
+      width: 70px;
+      height: 70px;
+      font-size: 50px;
+      color: #a35709;
+      @include color();
+      border-radius: 4px;
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+    .add-button:focus {
+      color: $focus-color;
+      @include focus-color();
+    }
+  }
+
+  .main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    .text-main-container {
+      border-top: 3px solid $focus-color;
+      border-bottom: 3px solid $focus-color;
+      font-family: "Roboto";
+      font-size: 24px;
+      color: #ffffff;
+    }
+  }
+  .task-element {
+    display: flex;
+    flex-direction: column;
+    .task-container {
+      max-width: 500px;
+      width: 100vw;
+      padding: 10px;
+      border-radius: 8px;
+      @include color();
+      box-sizing: border-box;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      &-text {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        color: #f0e3caa3;
+
+        h3 {
+          font-family: "Roboto";
+          font-size: 22px;
+          font-weight: 500;
+        }
+        p {
+          font-family: "Roboto";
+          font-size: 14px;
+        }
+      }
+      .delete-button {
+        padding: 8px 12px;
+        @include color();
+        color: #a35709;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+      .delete-button:focus {
+        color: $focus-color;
+        @include focus-color();
+      }
+    }
+    .task-container:focus {
+      @include focus-color();
+    }
+    .edit-menu {
+      max-width: 500px;
+      width: 100vw;
+      height: 44px;
+      justify-content: flex-end;
+      align-items: flex-end;
+      .block-buttons {
+        width: 124px;
+        height: 36px;
+        display: flex;
+        justify-content: space-between;
+        button {
+          width: 36px;
+          height: 36px;
+          @include color();
+          border-radius: 4px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: "Roboto";
+          font-size: 16px;
+          font-weight: 700;
+          color: #ffffff;
+          img {
+            width: 14px;
+            height: 14px;
+          }
+        }
+        button:focus {
+          @include focus-color();
+        }
+      }
+    }
+  }
+}
+.delete-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #070707e3;
+  position: absolute;
+  &-content {
+    max-width: 300px;
+    width: 100vw;
+    height: 150px;
+    background-color: $background-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-top: 3px solid #a35709;
+    span {
+      font-family: "Roboto";
+      color: #ffffff;
+    }
+    .delete-buttons {
+      .yes-button {
+        font-family: "Roboto";
+        @include color();
+        color: #d9d9d9;
+        cursor: pointer;
+      }
+      .yes-button:focus {
+        @include focus-color();
+      }
+      .no-button {
+        font-family: "Roboto";
+        @include color();
+        color: #d9d9d9;
+        cursor: pointer;
+      }
+      .no-button:focus {
+        @include focus-color();
+      }
+    }
+  }
+}
+.share-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #070707e3;
+  position: absolute;
+  &-content {
+    max-width: 400px;
+    width: 100vw;
+    height: 76px;
+    background-color: $background-color;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .share-buttons {
+      max-width: 350px;
+      width: 100vw;
+      height: 48px;
+      display: flex;
+      justify-content: space-evenly;
+
+      button {
+        width: 48px;
+        height: 48px;
+        background-color: #23221f;
+        border-radius: 100%;
+        border: #23221f;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      button:focus {
+        background-color: #2a2926;
+      }
+    }
+  }
+}
+.edit-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #070707e3;
+  position: absolute;
+  &-content {
+    max-width: 360px;
+    width: 100vw;
+    height: 451px;
+    border-radius: 8px;
+    background-color: $background-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .edit-window {
+      max-width: 330px;
+      width: 100vw;
+      height: 415px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      .edit-title {
+        max-width: 330px;
+        width: 100vw;
+        height: 32px;
+        color: #f0e3ca;
+        font-size: 14px;
+        font-family: "Roboto";
+        font-weight: 400;
+        @include color();
+        outline: none;
+      }
+      .edit-title:focus {
+        @include focus-color();
+      }
+
+      .edit-about {
+        max-width: 330px;
+        width: 100vw;
+        height: 343px;
+        color: #f0e3ca;
+        font-size: 14px;
+        font-family: "Roboto";
+        font-weight: 400;
+        @include color();
+        outline: none;
+      }
+      .edit-about:focus {
+        @include focus-color();
+      }
+
+      .buttons {
+        max-width: 140px;
+        width: 100vw;
+        height: 24px;
+        display: flex;
+        justify-content: space-between;
+        button {
+          width: 64px;
+          height: 24px;
+          font-size: 10px;
+          font-family: "Roboto";
+          font-weight: 400;
+          @include color();
+          color: #d9d9d9;
+          cursor: pointer;
+        }
+        button:focus {
+          @include focus-color();
+        }
+      }
+    }
+  }
+}

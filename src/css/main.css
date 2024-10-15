@@ -1,0 +1,635 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+input {
+  outline: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../../static/fonts/Roboto-Regular.ttf");
+}
+.root {
+  background-color: #1b1a17;
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+.root .task-input-container {
+  max-width: 400px;
+  width: 100vw;
+  height: 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 20px;
+}
+.root .task-input-container .input-container {
+  max-width: 300px;
+  width: 100vw;
+  height: 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.root .task-input-container .input-container .title-input {
+  max-width: 300px;
+  width: 100vw;
+  height: 30px;
+  font-family: "Roboto";
+  border: 1px solid #a35709;
+  background-color: #1b1a17;
+  border-radius: 4px;
+  color: rgba(240, 227, 202, 0.6392156863);
+  outline: none;
+}
+.root .task-input-container .input-container .title-input:focus {
+  border: 1px solid #ff8303;
+  background-color: #1f1e1b;
+}
+.root .task-input-container .input-container .about-input {
+  max-width: 300px;
+  width: 100vw;
+  height: 30px;
+  font-family: "Roboto";
+  border: 1px solid #a35709;
+  background-color: #1b1a17;
+  color: rgba(240, 227, 202, 0.6392156863);
+  border-radius: 4px;
+  outline: none;
+}
+.root .task-input-container .input-container .about-input:focus {
+  border: 1px solid #ff8303;
+  background-color: #1f1e1b;
+}
+.root .task-input-container .add-button {
+  width: 70px;
+  height: 70px;
+  font-size: 50px;
+  color: #a35709;
+  border: 1px solid #a35709;
+  background-color: #1b1a17;
+  border-radius: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.root .task-input-container .add-button:focus {
+  color: #ff8303;
+  border: 1px solid #ff8303;
+  background-color: #1f1e1b;
+}
+.root .main-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 200px;
+}
+.root .main-container .text-main-container {
+  border-top: 3px solid #ff8303;
+  border-bottom: 3px solid #ff8303;
+  font-family: "Roboto";
+  font-size: 24px;
+  color: #ffffff;
+}
+.root .task-element {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.root .task-element .task-container {
+  max-width: 500px;
+  width: 100vw;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #a35709;
+  background-color: #1b1a17;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+.root .task-element .task-container-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: rgba(240, 227, 202, 0.6392156863);
+}
+.root .task-element .task-container-text h3 {
+  font-family: "Roboto";
+  font-size: 22px;
+  font-weight: 500;
+}
+.root .task-element .task-container-text p {
+  font-family: "Roboto";
+  font-size: 14px;
+}
+.root .task-element .task-container .delete-button {
+  padding: 8px 12px;
+  border: 1px solid #a35709;
+  background-color: #1b1a17;
+  color: #a35709;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.root .task-element .task-container .delete-button:focus {
+  color: #ff8303;
+  border: 1px solid #ff8303;
+  background-color: #1f1e1b;
+}
+.root .task-element .task-container:focus {
+  border: 1px solid #ff8303;
+  background-color: #1f1e1b;
+}
+.root .task-element .edit-menu {
+  max-width: 500px;
+  width: 100vw;
+  height: 44px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+.root .task-element .edit-menu .block-buttons {
+  width: 124px;
+  height: 36px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.root .task-element .edit-menu .block-buttons button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #a35709;
+  background-color: #1b1a17;
+  border-radius: 4px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: "Roboto";
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.root .task-element .edit-menu .block-buttons button img {
+  width: 14px;
+  height: 14px;
+}
+.root .task-element .edit-menu .block-buttons button:focus {
+  border: 1px solid #ff8303;
+  background-color: #1f1e1b;
+}
+
+.delete-container {
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(7, 7, 7, 0.8901960784);
+  position: absolute;
+}
+.delete-container-content {
+  max-width: 300px;
+  width: 100vw;
+  height: 150px;
+  background-color: #1b1a17;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  border-top: 3px solid #a35709;
+}
+.delete-container-content span {
+  font-family: "Roboto";
+  color: #ffffff;
+}
+.delete-container-content .delete-buttons .yes-button {
+  font-family: "Roboto";
+  border: 1px solid #a35709;
+  background-color: #1b1a17;
+  color: #d9d9d9;
+  cursor: pointer;
+}
+.delete-container-content .delete-buttons .yes-button:focus {
+  border: 1px solid #ff8303;
+  background-color: #1f1e1b;
+}
+.delete-container-content .delete-buttons .no-button {
+  font-family: "Roboto";
+  border: 1px solid #a35709;
+  background-color: #1b1a17;
+  color: #d9d9d9;
+  cursor: pointer;
+}
+.delete-container-content .delete-buttons .no-button:focus {
+  border: 1px solid #ff8303;
+  background-color: #1f1e1b;
+}
+
+.share-container {
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  background-color: rgba(7, 7, 7, 0.8901960784);
+  position: absolute;
+}
+.share-container-content {
+  max-width: 400px;
+  width: 100vw;
+  height: 76px;
+  background-color: #1b1a17;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.share-container-content .share-buttons {
+  max-width: 350px;
+  width: 100vw;
+  height: 48px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+.share-container-content .share-buttons button {
+  width: 48px;
+  height: 48px;
+  background-color: #23221f;
+  border-radius: 100%;
+  border: #23221f;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+.share-container-content .share-buttons button:focus {
+  background-color: #2a2926;
+}
+
+.edit-container {
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  background-color: rgba(7, 7, 7, 0.8901960784);
+  position: absolute;
+}
+.edit-container-content {
+  max-width: 360px;
+  width: 100vw;
+  height: 451px;
+  border-radius: 8px;
+  background-color: #1b1a17;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.edit-container-content .edit-window {
+  max-width: 330px;
+  width: 100vw;
+  height: 415px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.edit-container-content .edit-window .edit-title {
+  max-width: 330px;
+  width: 100vw;
+  height: 32px;
+  color: #f0e3ca;
+  font-size: 14px;
+  font-family: "Roboto";
+  font-weight: 400;
+  border: 1px solid #a35709;
+  background-color: #1b1a17;
+  outline: none;
+}
+.edit-container-content .edit-window .edit-title:focus {
+  border: 1px solid #ff8303;
+  background-color: #1f1e1b;
+}
+.edit-container-content .edit-window .edit-about {
+  max-width: 330px;
+  width: 100vw;
+  height: 343px;
+  color: #f0e3ca;
+  font-size: 14px;
+  font-family: "Roboto";
+  font-weight: 400;
+  border: 1px solid #a35709;
+  background-color: #1b1a17;
+  outline: none;
+}
+.edit-container-content .edit-window .edit-about:focus {
+  border: 1px solid #ff8303;
+  background-color: #1f1e1b;
+}
+.edit-container-content .edit-window .buttons {
+  max-width: 140px;
+  width: 100vw;
+  height: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.edit-container-content .edit-window .buttons button {
+  width: 64px;
+  height: 24px;
+  font-size: 10px;
+  font-family: "Roboto";
+  font-weight: 400;
+  border: 1px solid #a35709;
+  background-color: #1b1a17;
+  color: #d9d9d9;
+  cursor: pointer;
+}
+.edit-container-content .edit-window .buttons button:focus {
+  border: 1px solid #ff8303;
+  background-color: #1f1e1b;
+}/*# sourceMappingURL=main.css.map */
