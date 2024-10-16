@@ -113,14 +113,6 @@ function MainPage() {
                 </div>
             </div>`;
     root.appendChild(shareContainer);
-
-    document.addEventListener("click", (event) => {
-      const isClickInside = shareContainer.contains(event.target);
-      if (isClickInside) {
-        root.removeChild(shareContainer);
-        document.removeEventListener("click", arguments.callee);
-      }
-    });
   }
 
   function Edit(index) {

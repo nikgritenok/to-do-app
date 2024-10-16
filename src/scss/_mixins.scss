@@ -1,0 +1,9 @@
+@mixin focus-color {
+  border: 1px solid $focus-color;
+  background-color: $background-color;
+}
+
+@mixin color {
+  border: 1px solid $border-color;
+  background-color: $background-color;
+}

@@ -211,10 +211,11 @@ summary {
   border-radius: 4px;
   color: rgba(240, 227, 202, 0.6392156863);
   outline: none;
+  margin-bottom: 6px;
 }
 .root .task-input-container .input-container .title-input:focus {
   border: 1px solid #ff8303;
-  background-color: #1f1e1b;
+  background-color: #1b1a17;
 }
 .root .task-input-container .input-container .about-input {
   max-width: 300px;
@@ -229,16 +230,14 @@ summary {
 }
 .root .task-input-container .input-container .about-input:focus {
   border: 1px solid #ff8303;
-  background-color: #1f1e1b;
+  background-color: #1b1a17;
 }
 .root .task-input-container .add-button {
   width: 70px;
   height: 70px;
   font-size: 50px;
   color: #a35709;
-  border: 1px solid #a35709;
-  background-color: #1b1a17;
-  border-radius: 4px;
+  border-radius: 6px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -249,11 +248,9 @@ summary {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-}
-.root .task-input-container .add-button:focus {
+  border: 2px solid #ff8303;
+  background-color: #1b1a17;
   color: #ff8303;
-  border: 1px solid #ff8303;
-  background-color: #1f1e1b;
 }
 .root .main-container {
   display: -webkit-box;
@@ -268,11 +265,24 @@ summary {
   height: 200px;
 }
 .root .main-container .text-main-container {
-  border-top: 3px solid #ff8303;
-  border-bottom: 3px solid #ff8303;
   font-family: "Roboto";
   font-size: 24px;
   color: #ffffff;
+}
+.root .main-container .text-main-container::before, .root .main-container .text-main-container::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  background-color: #ff8303;
+  margin: 0 auto;
+  border-radius: 3px;
+}
+.root .main-container .text-main-container::before {
+  margin-bottom: 10px;
+}
+.root .main-container .text-main-container::after {
+  margin-top: 10px;
 }
 .root .task-element {
   display: -webkit-box;
@@ -340,11 +350,11 @@ summary {
 .root .task-element .task-container .delete-button:focus {
   color: #ff8303;
   border: 1px solid #ff8303;
-  background-color: #1f1e1b;
+  background-color: #1b1a17;
 }
 .root .task-element .task-container:focus {
   border: 1px solid #ff8303;
-  background-color: #1f1e1b;
+  background-color: #1b1a17;
 }
 .root .task-element .edit-menu {
   max-width: 500px;
@@ -367,7 +377,7 @@ summary {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-.root .task-element .edit-menu .block-buttons button {
+.root .task-element .edit-menu .block-buttons__button {
   width: 36px;
   height: 36px;
   border: 1px solid #a35709;
@@ -388,13 +398,13 @@ summary {
   font-weight: 700;
   color: #ffffff;
 }
-.root .task-element .edit-menu .block-buttons button img {
+.root .task-element .edit-menu .block-buttons__button img {
   width: 14px;
   height: 14px;
 }
 .root .task-element .edit-menu .block-buttons button:focus {
   border: 1px solid #ff8303;
-  background-color: #1f1e1b;
+  background-color: #1b1a17;
 }
 
 .delete-container {
@@ -431,6 +441,7 @@ summary {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   border-top: 3px solid #a35709;
+  border-radius: 4px;
 }
 .delete-container-content span {
   font-family: "Roboto";
@@ -442,10 +453,12 @@ summary {
   background-color: #1b1a17;
   color: #d9d9d9;
   cursor: pointer;
+  border-radius: 4px;
+  min-width: 64px;
 }
-.delete-container-content .delete-buttons .yes-button:focus {
+.delete-container-content .delete-buttons .yes-button:hover {
   border: 1px solid #ff8303;
-  background-color: #1f1e1b;
+  background-color: #1b1a17;
 }
 .delete-container-content .delete-buttons .no-button {
   font-family: "Roboto";
@@ -453,10 +466,10 @@ summary {
   background-color: #1b1a17;
   color: #d9d9d9;
   cursor: pointer;
-}
-.delete-container-content .delete-buttons .no-button:focus {
+  border-radius: 4px;
   border: 1px solid #ff8303;
-  background-color: #1f1e1b;
+  background-color: #1b1a17;
+  min-width: 64px;
 }
 
 .share-container {
@@ -589,7 +602,7 @@ summary {
 }
 .edit-container-content .edit-window .edit-title:focus {
   border: 1px solid #ff8303;
-  background-color: #1f1e1b;
+  background-color: #1b1a17;
 }
 .edit-container-content .edit-window .edit-about {
   max-width: 330px;
@@ -605,7 +618,7 @@ summary {
 }
 .edit-container-content .edit-window .edit-about:focus {
   border: 1px solid #ff8303;
-  background-color: #1f1e1b;
+  background-color: #1b1a17;
 }
 .edit-container-content .edit-window .buttons {
   max-width: 140px;
@@ -631,5 +644,5 @@ summary {
 }
 .edit-container-content .edit-window .buttons button:focus {
   border: 1px solid #ff8303;
-  background-color: #1f1e1b;
+  background-color: #1b1a17;
 }/*# sourceMappingURL=main.css.map */

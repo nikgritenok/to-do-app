@@ -3,15 +3,6 @@
   src: url("../../static/fonts/Roboto-Regular.ttf");
 }
 
-@mixin focus-color {
-  border: 1px solid $focus-color;
-  background-color: $background-color;
-}
-
-@mixin color {
-  border: 1px solid #a35709;
-  background-color: $background-color;
-}
 .root {
   background-color: $background-color;
   width: 100vw;
@@ -45,9 +36,11 @@
         border-radius: 4px;
         color: #f0e3caa3;
         outline: none;
-      }
-      .title-input:focus {
-        @include focus-color();
+        margin-bottom: 6px;
+
+        &:focus {
+          @include focus-color();
+        }
       }
 
       .about-input {
@@ -59,26 +52,25 @@
         color: #f0e3caa3;
         border-radius: 4px;
         outline: none;
-      }
-      .about-input:focus {
-        @include focus-color();
+
+        &:focus {
+          @include focus-color();
+        }
       }
     }
     .add-button {
       width: 70px;
       height: 70px;
       font-size: 50px;
-      color: #a35709;
-      @include color();
-      border-radius: 4px;
+      color: $border-color;
+      border-radius: 6px;
       display: flex;
       cursor: pointer;
       align-items: center;
       justify-content: center;
-    }
-    .add-button:focus {
+      border: 2px solid $focus-color;
+      background-color: $background-color;
       color: $focus-color;
-      @include focus-color();
     }
   }
 
@@ -88,11 +80,27 @@
     align-items: center;
     height: 200px;
     .text-main-container {
-      border-top: 3px solid $focus-color;
-      border-bottom: 3px solid $focus-color;
       font-family: "Roboto";
       font-size: 24px;
       color: #ffffff;
+
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        width: 64px;
+        height: 3px;
+        background-color: $focus-color;
+        margin: 0 auto;
+        border-radius: 3px;
+      }
+
+      &::before {
+        margin-bottom: 10px;
+      }
+      &::after {
+        margin-top: 10px;
+      }
     }
   }
   .task-element {
@@ -129,7 +137,7 @@
       .delete-button {
         padding: 8px 12px;
         @include color();
-        color: #a35709;
+        color: $border-color;
         border-radius: 4px;
         cursor: pointer;
         font-size: 16px;
@@ -154,7 +162,7 @@
         height: 36px;
         display: flex;
         justify-content: space-between;
-        button {
+        &__button {
           width: 36px;
           height: 36px;
           @include color();
@@ -196,7 +204,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    border-top: 3px solid #a35709;
+    border-top: 3px solid $border-color;
+    border-radius: 4px;
     span {
       font-family: "Roboto";
       color: #ffffff;
@@ -207,18 +216,22 @@
         @include color();
         color: #d9d9d9;
         cursor: pointer;
-      }
-      .yes-button:focus {
-        @include focus-color();
+        border-radius: 4px;
+        min-width: 64px;
+
+        &:hover {
+          @include focus-color();
+        }
       }
       .no-button {
         font-family: "Roboto";
         @include color();
         color: #d9d9d9;
         cursor: pointer;
-      }
-      .no-button:focus {
-        @include focus-color();
+        border-radius: 4px;
+        border: 1px solid $focus-color;
+        background-color: $background-color;
+        min-width: 64px;
       }
     }
   }
