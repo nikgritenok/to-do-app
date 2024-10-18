@@ -82,7 +82,6 @@ function MainPage() {
             </div>`;
 
     const buttonShare = editMenu.querySelector(".block-buttons__button--share");
-    const buttonI = editMenu.querySelector(".block-buttons__button--info");
     const buttonEdit = editMenu.querySelector(".block-buttons__button--edit");
 
     buttonShare.addEventListener("click", () => Share());
