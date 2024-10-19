@@ -1,3 +1,5 @@
+import "./scss/main.scss";
+
 let root = document.getElementById("root");
 
 function MainPage() {

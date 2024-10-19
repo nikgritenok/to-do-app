@@ -1,9 +1,11 @@
+@use "variables";
+
 @mixin focus-color {
-  border: 1px solid $focus-color;
-  background-color: $background-color;
+  border: 1px solid variables.$focus-color;
+  background-color: variables.$background-color;
 }
 
 @mixin color {
-  border: 1px solid $border-color;
-  background-color: $background-color;
+  border: 1px solid variables.$border-color;
+  background-color: variables.$background-color;
 }
