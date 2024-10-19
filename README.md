@@ -24,21 +24,21 @@ This is a simple **To-Do List** application built using **HTML**, **SCSS**, and 
 
 1. Clone the repository:
 
-```bash
-git clone https://github.com/yourusername/todo-app.git
-cd todo-app
-```
+   ```bash
+   git clone https://github.com/yourusername/todo-app.git
+   cd todo-app
+   ```
 
 2. Install dependencies:
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 3. Start the development server using Vite:
 
-```bash
-npm run dev
-```
+   ```bash
+   npm run dev
+   ```
 
 4. Open your browser and navigate to http://localhost:5173 to view the application.
