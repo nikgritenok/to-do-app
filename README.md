@@ -16,6 +16,9 @@ This is a simple **To-Do List** application built using **HTML**, **SCSS**, and 
 - **HTML**: Structure of the application.
 - **SCSS**: Styling of the application with the use of variables and mixins.
 - **JavaScript**: Logic for adding, editing, deleting tasks, and managing UI interactions.
+- **Vite**: A fast build tool for modern web projects, used to serve and bundle the application.
+- **ESLint**: A tool for identifying and fixing problems in JavaScript code, ensuring code quality and consistency.
+- **Prettier**: A code formatter that enforces a consistent style across the project.
 
 ## How to Run
 
@@ -26,9 +29,16 @@ This is a simple **To-Do List** application built using **HTML**, **SCSS**, and 
    cd todo-app
    ```
 
-2. Open index.html in your browser to view the application.
-3. To make changes to the SCSS, ensure you have a SCSS compiler (e.g., sass or node-sass). Run the following command to compile the SCSS to CSS:
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the development server using Vite:
 
    ```bash
-   sass static/scss/style.scss static/css/style.css
+   npm run dev
    ```
+
+4. Open your browser and navigate to http://localhost:5173 to view the application.
