@@ -1,152 +1,182 @@
 import "./scss/main.scss";
+import {
+  generateId,
+  getTasks,
+  addTask,
+  deleteTask as removeTask,
+  updateTask,
+} from "./components/localStorage";
 
-let root = document.getElementById("root");
+const root = document.getElementById("root");
+document.title = "to-do-app";
 
 function MainPage() {
-  let hasTasks = false;
-  let tasks = [];
+  const render = () => {
+    root.innerHTML = "";
+    root.appendChild(TaskInput());
 
-  function TaskInput() {
+    const tasks = getTasks(); // Получаем текущий список задач из localStorage
+    if (tasks.length > 0) {
+      tasks.forEach((task, index) =>
+        root.appendChild(createTaskElement(task, index))
+      );
+    } else {
+      root.appendChild(createNoTasksMessage());
+    }
+  };
+
+  const TaskInput = () => {
     const container = document.createElement("div");
-    container.className = "task-input-container";
+    container.classList.add("task-input-container");
     container.innerHTML = `
-            <div class="input-container">
-                <input placeholder="Title..." class="title-input">
-                <input placeholder="About..." class="about-input">
-            </div>
-            <button class="add-button">+</button>`;
+      <div class="input-container">
+          <input placeholder="Title..." class="title-input">
+          <input placeholder="About..." class="about-input">
+      </div>
+      <button class="add-button">+</button>`;
+
+    setupListeners(container);
     return container;
-  }
+  };
 
-  function _setupListeners(element) {
-    let titleInput = element.querySelector(".title-input");
-    let aboutInput = element.querySelector(".about-input");
-    let addButton = element.querySelector(".add-button");
+  const setupListeners = (element) => {
+    const titleInput = element.querySelector(".title-input");
+    const aboutInput = element.querySelector(".about-input");
+    const addButton = element.querySelector(".add-button");
+
     addButton.addEventListener("click", () => AddTask(titleInput, aboutInput));
-  }
+  };
 
-  function AddTask(titleInput, aboutInput) {
+  const AddTask = (titleInput, aboutInput) => {
     const title = titleInput.value.trim();
     const about = aboutInput.value.trim();
+
     if (title && about) {
-      const newTask = { title, about };
-      tasks.push(newTask);
-      hasTasks = true;
+      const task = { id: generateId(), title, about }; // Генерируем уникальный ID
+      addTask(task); // Сохраняем задачу в localStorage
       titleInput.value = "";
       aboutInput.value = "";
       render();
     } else {
       alert("Поля не должны быть пустыми.");
     }
-  }
+  };
 
-  function render() {
-    root.innerHTML = "";
-    root.appendChild(TaskInput());
-    _setupListeners(root);
+  const createNoTasksMessage = () => {
+    const noTasksMessage = document.createElement("div");
+    noTasksMessage.classList.add("main-container");
+    noTasksMessage.innerHTML = `<div class="text-main-container"><span>No tasks</span></div>`;
+    return noTasksMessage;
+  };
 
-    if (hasTasks) {
-      tasks.forEach((task, index) => {
-        const taskElement = createTaskElement(task, index);
-        root.appendChild(taskElement);
-      });
-    } else {
-      const noTasksMessage = document.createElement("div");
-      noTasksMessage.className = "main-container";
-      noTasksMessage.innerHTML = `<div class="text-main-container"><span>No tasks</span></div>`;
-      root.appendChild(noTasksMessage);
-    }
-  }
+  const createTaskElement = (task, index) => {
+    const taskContainer = document.createElement("div");
+    taskContainer.classList.add("task-element");
 
-  function createTaskElement(task, index) {
-    const taskElement = document.createElement("div");
-    taskElement.className = "task-element";
-    const taskContainer = document.createElement("button");
-    taskContainer.className = "task-container";
     taskContainer.innerHTML = `
-            <div class="task-container-text">
-                <h3>${task.title}</h3>
-                <p>${task.about}</p>
-            </div>
-            <button class="delete-button" id="deleteButton-${index}">x</button>`;
-    const deleteButton = taskContainer.querySelector(`#deleteButton-${index}`);
-    deleteButton.addEventListener("click", () => deleteTask(index));
+      <div class="task-container">
+          <div class="task-container-text">
+              <h3>${task.title}</h3>
+              <p>${task.about}</p>
+          </div>
+          <button class="delete-button" id="deleteButton-${task.id}">x</button>
+      </div>
+      <div class="edit-menu" id="editMenu-${task.id}" style="display: none;">
+          <div class="block-buttons">
+              <button class="block-buttons__button block-buttons__button--share"><img src="../static/icons/Share.svg" alt="share"></button>
+              <button class="block-buttons__button block-buttons__button--info" alt="info">i</button>
+              <button class="block-buttons__button block-buttons__button--edit"><img src="../static/icons/Edit.svg" alt="edit"></button>
+          </div>
+      </div>`;
 
-    const editMenu = document.createElement("div");
-    editMenu.className = "edit-menu";
-    editMenu.id = `editMenu-${index}`;
-    editMenu.style.display = "none";
-    editMenu.innerHTML = `
-            <div class="block-buttons">
-                <button class="block-buttons__button block-buttons__button--share"><img src="../static/icons/Share.svg" alt="share"></button>
-                <button class="block-buttons__button block-buttons__button--info" alt="info">i</button>
-                <button class="block-buttons__button block-buttons__button--edit"><img src="../static/icons/Edit.svg" alt="edit"></button>
-            </div>`;
+    setupTaskListeners(taskContainer, task.id);
+    return taskContainer;
+  };
+
+  const setupTaskListeners = (taskContainer, taskId) => {
+    const deleteButton = taskContainer.querySelector(`.delete-button`);
+    deleteButton.addEventListener("click", () => deleteTask(taskId));
+
+    const editMenu = taskContainer.querySelector(`#editMenu-${taskId}`);
+    taskContainer.addEventListener("click", (event) => {
+      event.stopPropagation();
+      editMenu.style.display =
+        editMenu.style.display === "flex" ? "none" : "flex";
+    });
 
     const buttonShare = editMenu.querySelector(".block-buttons__button--share");
     const buttonEdit = editMenu.querySelector(".block-buttons__button--edit");
 
-    buttonShare.addEventListener("click", () => Share());
-    buttonEdit.addEventListener("click", () => Edit(index));
+    buttonShare.addEventListener("click", Share);
+    buttonEdit.addEventListener("click", () => Edit(taskId));
+  };
 
-    taskElement.appendChild(taskContainer);
-    taskElement.appendChild(editMenu);
-
-    taskContainer.addEventListener("click", (event) => {
-      event.stopPropagation();
-      const isEditMenuVisible = editMenu.style.display === "flex";
-      editMenu.style.display = isEditMenuVisible ? "none" : "flex";
-    });
-    return taskElement;
-  }
-
-  function Share() {
-    const shareContainer = document.createElement("div");
-    shareContainer.className = "share-container";
-    shareContainer.innerHTML = `
-            <div class="share-container-content">
-                <div class="share-buttons">
-                    <button class="share-button"><img src="../static/icons/Share.svg" alt="Share"></button>
-                    <button class="vk-button"><img src="../static/icons/VK.svg" alt="VK"></button>
-                    <button class="telegram-button"><img src="../static/icons/Telegram.svg" alt="Telegram"></button>
-                    <button class="whatsapp-button"><img src="../static/icons/Whatsapp.svg" alt="Whatsapp"></button>
-                    <button class="facebook-button"><img src="../static/icons/Facebook.svg" alt="Facebook"></button>
-                </div>
-            </div>`;
+  const Share = () => {
+    const shareContainer = createShareContainer();
     root.appendChild(shareContainer);
+    setupShareListeners(shareContainer);
+  };
 
+  const createShareContainer = () => {
+    const shareContainer = document.createElement("div");
+    shareContainer.classList.add("share-container");
+    shareContainer.innerHTML = `
+      <div class="share-container-content">
+          <div class="share-buttons">
+              <button class="share-button"><img src="../static/icons/Share.svg" alt="Share"></button>
+              <button class="vk-button"><img src="../static/icons/VK.svg" alt="VK"></button>
+              <button class="telegram-button"><img src="../static/icons/Telegram.svg" alt="Telegram"></button>
+              <button class="whatsapp-button"><img src="../static/icons/Whatsapp.svg" alt="Whatsapp"></button>
+              <button class="facebook-button"><img src="../static/icons/Facebook.svg" alt="Facebook"></button>
+          </div>
+      </div>`;
+    return shareContainer;
+  };
+
+  const setupShareListeners = (shareContainer) => {
     document.addEventListener("click", (event) => {
-      const isClickInside = shareContainer.contains(event.target);
-      if (isClickInside) {
+      if (!shareContainer.contains(event.target)) {
         root.removeChild(shareContainer);
         document.removeEventListener("click", arguments.callee);
       }
     });
-  }
+  };
 
-  function Edit(index) {
-    const editContainer = document.createElement("div");
-    editContainer.className = "edit-container";
-    editContainer.innerHTML = `
-            <div class="edit-container-content">
-                <div class="edit-window">
-                    <input type="text" placeholder="Mini Input..." class="edit-title" >                    
-                    <input type="text" placeholder="Max Input..." class="edit-about" >
-                    <div class="buttons">
-                        <button class="cancel">Cancel</button>
-                        <button class="save">Save</button>
-                    </div>
-                </div>
-            </div>`;
-
+  const Edit = (taskId) => {
+    const editContainer = createEditContainer(taskId);
     root.appendChild(editContainer);
+    setupEditListeners(editContainer, taskId);
+  };
 
+  const createEditContainer = (taskId) => {
+    const task = getTasks().find((task) => task.id === taskId); // Получаем задачу по ID
+    const editContainer = document.createElement("div");
+    editContainer.classList.add("edit-container");
+    editContainer.innerHTML = `
+      <div class="edit-container-content">
+          <div class="edit-window">
+              <input type="text" placeholder="Mini Input..." class="edit-title" value="${task.title}">                    
+              <input type="text" placeholder="Max Input..." class="edit-about" value="${task.about}">
+              <div class="buttons">
+                  <button class="cancel">Cancel</button>
+                  <button class="save">Save</button>
+              </div>
+          </div>
+      </div>`;
+    return editContainer;
+  };
+
+  const setupEditListeners = (editContainer, taskId) => {
     const cancelButton = editContainer.querySelector(".cancel");
     const saveButton = editContainer.querySelector(".save");
 
     saveButton.addEventListener("click", () => {
-      tasks[index].title = editContainer.querySelector(".edit-title").value;
-      tasks[index].about = editContainer.querySelector(".edit-about").value;
+      const updatedTask = {
+        id: taskId,
+        title: editContainer.querySelector(".edit-title").value,
+        about: editContainer.querySelector(".edit-about").value,
+      };
+      updateTask(updatedTask); // Обновляем задачу в localStorage
       root.removeChild(editContainer);
       render();
     });
@@ -154,34 +184,44 @@ function MainPage() {
     cancelButton.addEventListener("click", () => {
       root.removeChild(editContainer);
     });
-  }
+  };
 
-  function deleteTask(index) {
-    const confirmationDialog = document.createElement("div");
-    confirmationDialog.className = "delete-container";
-    confirmationDialog.innerHTML = `
-            <div class="delete-container-content">
-                <span>Delete this task?</span>
-                <div class="delete-buttons">
-                    <button class="yes-button">Yes</button>
-                    <button class="no-button">No</button>
-                </div>
-            </div>`;
+  const deleteTask = (taskId) => {
+    const confirmationDialog = createConfirmationDialog(taskId);
     root.appendChild(confirmationDialog);
+    setupConfirmationListeners(confirmationDialog, taskId);
+  };
+
+  const createConfirmationDialog = (taskId) => {
+    const confirmationDialog = document.createElement("div");
+    confirmationDialog.classList.add("delete-container");
+    confirmationDialog.innerHTML = `
+      <div class="delete-container-content">
+          <span>Delete this task?</span>
+          <div class="delete-buttons">
+              <button class="yes-button">Yes</button>
+              <button class="no-button">No</button>
+          </div>
+      </div>`;
+    return confirmationDialog;
+  };
+
+  const setupConfirmationListeners = (confirmationDialog, taskId) => {
     const yesButton = confirmationDialog.querySelector(".yes-button");
     const noButton = confirmationDialog.querySelector(".no-button");
+
     yesButton.addEventListener("click", () => {
-      tasks.splice(index, 1);
-      if (tasks.length === 0) {
-        hasTasks = false;
-      }
-      root.removeChild(confirmationDialog);
+      removeTask(taskId); // Удаляем задачу из localStorage
       render();
+      root.removeChild(confirmationDialog);
     });
+
     noButton.addEventListener("click", () => {
       root.removeChild(confirmationDialog);
     });
-  }
+  };
+
   render();
 }
+
 MainPage();
