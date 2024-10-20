@@ -11,20 +11,20 @@ const root = document.getElementById("root");
 document.title = "to-do-app";
 
 function MainPage() {
+  // Render tasks and input area
   const render = () => {
     root.innerHTML = "";
     root.appendChild(TaskInput());
 
-    const tasks = getTasks(); // Получаем текущий список задач из localStorage
+    const tasks = getTasks();
     if (tasks.length > 0) {
-      tasks.forEach((task, index) =>
-        root.appendChild(createTaskElement(task, index))
-      );
+      tasks.forEach((task) => root.appendChild(createTaskElement(task)));
     } else {
       root.appendChild(createNoTasksMessage());
     }
   };
 
+  // Input handling
   const TaskInput = () => {
     const container = document.createElement("div");
     container.classList.add("task-input-container");
@@ -52,8 +52,8 @@ function MainPage() {
     const about = aboutInput.value.trim();
 
     if (title && about) {
-      const task = { id: generateId(), title, about }; // Генерируем уникальный ID
-      addTask(task); // Сохраняем задачу в localStorage
+      const task = { id: generateId(), title, about };
+      addTask(task);
       titleInput.value = "";
       aboutInput.value = "";
       render();
@@ -62,6 +62,7 @@ function MainPage() {
     }
   };
 
+  // Task creation and display
   const createNoTasksMessage = () => {
     const noTasksMessage = document.createElement("div");
     noTasksMessage.classList.add("main-container");
@@ -69,7 +70,7 @@ function MainPage() {
     return noTasksMessage;
   };
 
-  const createTaskElement = (task, index) => {
+  const createTaskElement = (task) => {
     const taskContainer = document.createElement("div");
     taskContainer.classList.add("task-element");
 
@@ -93,9 +94,13 @@ function MainPage() {
     return taskContainer;
   };
 
+  // Task event handling
   const setupTaskListeners = (taskContainer, taskId) => {
     const deleteButton = taskContainer.querySelector(`.delete-button`);
-    deleteButton.addEventListener("click", () => deleteTask(taskId));
+    deleteButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      deleteTask(taskId);
+    });
 
     const editMenu = taskContainer.querySelector(`#editMenu-${taskId}`);
     taskContainer.addEventListener("click", (event) => {
@@ -111,6 +116,42 @@ function MainPage() {
     buttonEdit.addEventListener("click", () => Edit(taskId));
   };
 
+  const deleteTask = (taskId) => {
+    const confirmationDialog = createConfirmationDialog();
+    root.appendChild(confirmationDialog);
+    setupConfirmationListeners(confirmationDialog, taskId);
+  };
+
+  const createConfirmationDialog = () => {
+    const confirmationDialog = document.createElement("div");
+    confirmationDialog.classList.add("delete-container");
+    confirmationDialog.innerHTML = `
+      <div class="delete-container-content">
+          <span>Delete this task?</span>
+          <div class="delete-buttons">
+              <button class="yes-button">Yes</button>
+              <button class="no-button">No</button>
+          </div>
+      </div>`;
+    return confirmationDialog;
+  };
+
+  const setupConfirmationListeners = (confirmationDialog, taskId) => {
+    const yesButton = confirmationDialog.querySelector(".yes-button");
+    const noButton = confirmationDialog.querySelector(".no-button");
+
+    yesButton.addEventListener("click", () => {
+      removeTask(taskId); // Удаляем задачу из localStorage
+      render();
+      root.removeChild(confirmationDialog);
+    });
+
+    noButton.addEventListener("click", () => {
+      root.removeChild(confirmationDialog);
+    });
+  };
+
+  // Share and Edit handling
   const Share = () => {
     const shareContainer = createShareContainer();
     root.appendChild(shareContainer);
@@ -135,9 +176,9 @@ function MainPage() {
 
   const setupShareListeners = (shareContainer) => {
     document.addEventListener("click", (event) => {
-      if (!shareContainer.contains(event.target)) {
-        root.removeChild(shareContainer);
-        document.removeEventListener("click", arguments.callee);
+      const content = shareContainer.querySelector(".share-container-content");
+      if (!content.contains(event.target)) {
+        shareContainer.remove();
       }
     });
   };
@@ -149,7 +190,7 @@ function MainPage() {
   };
 
   const createEditContainer = (taskId) => {
-    const task = getTasks().find((task) => task.id === taskId); // Получаем задачу по ID
+    const task = getTasks().find((task) => task.id === taskId);
     const editContainer = document.createElement("div");
     editContainer.classList.add("edit-container");
     editContainer.innerHTML = `
@@ -176,48 +217,13 @@ function MainPage() {
         title: editContainer.querySelector(".edit-title").value,
         about: editContainer.querySelector(".edit-about").value,
       };
-      updateTask(updatedTask); // Обновляем задачу в localStorage
+      updateTask(updatedTask);
       root.removeChild(editContainer);
       render();
     });
 
     cancelButton.addEventListener("click", () => {
       root.removeChild(editContainer);
-    });
-  };
-
-  const deleteTask = (taskId) => {
-    const confirmationDialog = createConfirmationDialog(taskId);
-    root.appendChild(confirmationDialog);
-    setupConfirmationListeners(confirmationDialog, taskId);
-  };
-
-  const createConfirmationDialog = (taskId) => {
-    const confirmationDialog = document.createElement("div");
-    confirmationDialog.classList.add("delete-container");
-    confirmationDialog.innerHTML = `
-      <div class="delete-container-content">
-          <span>Delete this task?</span>
-          <div class="delete-buttons">
-              <button class="yes-button">Yes</button>
-              <button class="no-button">No</button>
-          </div>
-      </div>`;
-    return confirmationDialog;
-  };
-
-  const setupConfirmationListeners = (confirmationDialog, taskId) => {
-    const yesButton = confirmationDialog.querySelector(".yes-button");
-    const noButton = confirmationDialog.querySelector(".no-button");
-
-    yesButton.addEventListener("click", () => {
-      removeTask(taskId); // Удаляем задачу из localStorage
-      render();
-      root.removeChild(confirmationDialog);
-    });
-
-    noButton.addEventListener("click", () => {
-      root.removeChild(confirmationDialog);
     });
   };
 
